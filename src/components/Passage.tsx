@@ -1,43 +1,24 @@
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { ComponentProps } from "react";
+import { ActivityIndicator, StyleSheet, View } from "react-native";
 import { usePassage } from "../hooks/usePassage";
+import { Button, Text, Card } from "../ui";
 
-export function Passage() {
-  const { passage, generate } = usePassage();
+interface Props extends ComponentProps<typeof Card> {
+  isLoading?: boolean;
+  text: string;
+}
 
+export function Passage({ isLoading, text, style, ...rest }: Props) {
   return (
-    <View style={style.container}>
-      <View style={style.passageContainer}>
-        <Text>{passage}</Text>
-      </View>
-      <Pressable onPress={generate} style={style.button}>
-        <Text style={style.buttonText}>Generate</Text>
-      </Pressable>
-    </View>
+    <Card style={[styles.container, style]} {...rest}>
+      {isLoading ? <ActivityIndicator /> : <Text variant="medium">{text}</Text>}
+    </Card>
   );
 }
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    padding: 16,
-  },
-  passageContainer: {
-    flex: 1,
     justifyContent: "center",
     alignItems: "center",
-  },
-  button: {
-    paddingHorizontal: 24,
-    paddingVertical: 16,
-    backgroundColor: "#222",
-    alignItems: "center",
-    flexDirection: "row",
-    justifyContent: "center",
-    borderRadius: 16,
-  },
-  buttonText: {
-    fontWeight: "bold",
-    textTransform: "uppercase",
-    color: "#eee",
   },
 });
