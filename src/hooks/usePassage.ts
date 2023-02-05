@@ -1,7 +1,12 @@
 import { useState } from "react";
+import { LanguageLevel } from "../types";
 import { useOpenaiPassage } from "./useOpenaiPassage";
 
-export function usePassage() {
+interface Props {
+  languageLevel: LanguageLevel;
+}
+
+export function usePassage({ languageLevel }: Props) {
   const [passage, setPassage] = useState<string>();
   const [isGenerating, setIsGenerating] = useState(false);
 
@@ -11,7 +16,7 @@ export function usePassage() {
     try {
       setIsGenerating(true);
       const text = await generateOpenaiText({
-        level: "A1",
+        level: languageLevel,
         words: ["gesundheit", "menschen"],
       });
       setPassage(text);
