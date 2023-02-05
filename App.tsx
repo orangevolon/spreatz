@@ -1,14 +1,13 @@
 import "react-native-url-polyfill/auto";
 
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
-import { Sentence } from "./src/components/Sentence";
+import { SafeAreaView, StyleSheet, Text, View } from "react-native";
+import { Passage } from "./src/components/Passage";
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Sentence />
-    </View>
+    <SafeAreaView style={styles.container}>
+      <Passage />
+    </SafeAreaView>
   );
 }
 
@@ -16,7 +15,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: "stretch",
   },
 });
