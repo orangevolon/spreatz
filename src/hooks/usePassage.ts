@@ -1,23 +1,23 @@
 import { useState } from "react";
-import { openai } from "../openai";
+import { useOpenaiPassage } from "./useOpenaiPassage";
 
 export function usePassage() {
   const [passage, setPassage] = useState<string>();
   const [isGenerating, setIsGenerating] = useState(false);
 
+  const { generate: generateOpenaiText } = useOpenaiPassage({
+    level: "A1",
+    words: ["gesundheit", "menschen"],
+  });
+
   const generate = async () => {
     try {
       setIsGenerating(true);
-
-      const { data } = await openai.createCompletion({
-        model: "text-davinci-003",
-        prompt: "Write something in German!",
-      });
-
-      const { text } = data.choices[0];
+      const text = await generateOpenaiText();
       setPassage(text);
     } catch (error) {
-      // Will add an error handler later
+      // TODO: add error handling later
+      console.error(error);
     } finally {
       setIsGenerating(false);
     }
