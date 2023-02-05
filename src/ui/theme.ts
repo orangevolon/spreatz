@@ -2,6 +2,7 @@ const LINE_HEIGHT_FACTOR = 1.5;
 
 export const theme = {
   spacing: {
+    xxs: 2,
     xs: 4,
     s: 8,
     m: 16,
@@ -19,6 +20,7 @@ export const theme = {
     foreground: "#111",
     buttonBackground: "#222",
     buttonForeground: "#eee",
+    selectedWord: "#f5bda2",
   },
   typography: {
     small: {

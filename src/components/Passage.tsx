@@ -1,7 +1,8 @@
 import { ComponentProps } from "react";
 import { ActivityIndicator, StyleSheet, View } from "react-native";
-import { usePassage } from "../hooks/usePassage";
-import { Button, Text, Card } from "../ui";
+import { useWordPick } from "../hooks/useWordPick";
+import { Card } from "../ui";
+import { TextPick } from "../ui/TextPick";
 
 interface Props extends ComponentProps<typeof Card> {
   isLoading?: boolean;
@@ -9,9 +10,21 @@ interface Props extends ComponentProps<typeof Card> {
 }
 
 export function Passage({ isLoading, text, style, ...rest }: Props) {
+  const { toggleWord, words: pickedWords } = useWordPick();
+
   return (
     <Card style={[styles.container, style]} {...rest}>
-      {isLoading ? <ActivityIndicator /> : <Text variant="medium">{text}</Text>}
+      {isLoading ? (
+        <ActivityIndicator />
+      ) : (
+        <TextPick
+          variant="medium"
+          pickedWords={pickedWords}
+          onWordPick={toggleWord}
+        >
+          {text}
+        </TextPick>
+      )}
     </Card>
   );
 }
