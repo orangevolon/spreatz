@@ -1,12 +1,13 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import Config from 'react-native-config';
+import "react-native-url-polyfill/auto";
+
+import { StatusBar } from "expo-status-bar";
+import { StyleSheet, Text, View } from "react-native";
+import { Sentence } from "./src/components/Sentence";
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Here: {Config.OPEN_AI_API_KEY}</Text>
-      <StatusBar style="auto" />
+      <Sentence />
     </View>
   );
 }
@@ -14,8 +15,8 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
