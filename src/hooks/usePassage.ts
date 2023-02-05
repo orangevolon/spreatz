@@ -1,5 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useWords } from "../contexts/WordsContext";
 import { LanguageLevel } from "../types";
+import { handleError } from "../utils/errors";
 import { useOpenaiPassage } from "./useOpenaiPassage";
 
 interface Props {
@@ -9,20 +11,18 @@ interface Props {
 export function usePassage({ languageLevel }: Props) {
   const [passage, setPassage] = useState<string>();
   const [isGenerating, setIsGenerating] = useState(false);
+  const { generate: generateOpenaiText } = useOpenaiPassage({ useFake: false });
 
-  const { generate: generateOpenaiText } = useOpenaiPassage({ useFake: true });
-
-  const generate = async () => {
+  const generate = async (words: string[]) => {
     try {
       setIsGenerating(true);
       const text = await generateOpenaiText({
         level: languageLevel,
-        words: ["gesundheit", "menschen"],
+        words,
       });
       setPassage(text);
     } catch (error) {
-      // TODO: add error handling later
-      console.error(error);
+      handleError(error);
     } finally {
       setIsGenerating(false);
     }

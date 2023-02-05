@@ -35,28 +35,30 @@ export function TextPick({
 
     const words = children.split(/\s/);
 
-    return words.map((word, index) => {
-      const pickedWord = sanitizedPickedWords?.includes(sanitizeWord(word));
-      const arrayKey = `${word}-${index}`;
+    return words
+      .filter((word) => Boolean(word))
+      .map((word, index) => {
+        const pickedWord = sanitizedPickedWords?.includes(sanitizeWord(word));
+        const arrayKey = `${word}-${index}`;
 
-      return (
-        <>
-          <Pressable
-            onPress={() => handleWordPick(word, index)}
-            key={arrayKey}
-            style={({ pressed }) => [
-              styles.wordBase,
-              pressed ? styles.wordPressed : undefined,
-              pickedWord ? [styles.wordSelected] : undefined,
-            ]}
-          >
-            {pickedWord ? <View style={styles.wordSelectedMarker} /> : null}
-            <Text>{word}</Text>
-          </Pressable>
-          {WHITESPACE}
-        </>
-      );
-    });
+        return (
+          <>
+            <Pressable
+              onPress={() => handleWordPick(word, index)}
+              key={arrayKey}
+              style={({ pressed }) => [
+                styles.wordBase,
+                pressed ? styles.wordPressed : undefined,
+                pickedWord ? [styles.wordSelected] : undefined,
+              ]}
+            >
+              {pickedWord ? <View style={styles.wordSelectedMarker} /> : null}
+              <Text>{word}</Text>
+            </Pressable>
+            {WHITESPACE}
+          </>
+        );
+      });
   }, [children, pickedWords]);
 
   return <Text {...rest}>{words}</Text>;

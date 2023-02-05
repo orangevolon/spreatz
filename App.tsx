@@ -5,13 +5,16 @@ import { Passage } from "./src/components/Passage";
 import { theme } from "./src/ui/theme";
 import { Main } from "./src/components/Main";
 import { LanguageLevelProvider } from "./src/contexts/LanguageLevelContext";
+import { WordsProvider } from "./src/contexts/WordsContext";
 
 export default function App() {
   return (
     <LanguageLevelProvider>
-      <SafeAreaView style={styles.container}>
-        <Main />
-      </SafeAreaView>
+      <WordsProvider>
+        <SafeAreaView style={styles.container}>
+          <Main />
+        </SafeAreaView>
+      </WordsProvider>
     </LanguageLevelProvider>
   );
 }

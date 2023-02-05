@@ -40,9 +40,13 @@ export function useOpenaiPassage({ useFake = false } = {}) {
 }
 
 function buildPrompt(words: string[], level: LanguageLevel) {
+  if (!words.length) {
+    return `Write one paragraph of German text at level ${level}`;
+  }
+
   const concatenatedWords = words.join(",");
   return `Write one paragraph of German text with words: ${concatenatedWords} at level ${level}`;
 }
 
 const FAKE_TEXT =
-  "Gesundheit ist sehr wichtig für alle Menschen. Es ist wichtig, dass Menschen gesund bleiben, um ein glückliches und erfülltes Leben zu führen.";
+  "\n\nGesundheit ist sehr wichtig für alle Menschen. Es ist wichtig, dass Menschen gesund bleiben, um ein glückliches und erfülltes Leben zu führen.";
