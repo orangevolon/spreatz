@@ -1,20 +1,22 @@
-import {
-  createContext,
-  PropsWithChildren,
-  useContext,
-  useState,
-} from "react";
+import { createContext, PropsWithChildren, useContext, useState } from "react";
 import { LanguageLevel } from "../types";
 import { handleError } from "../utils/errors";
 import { useOpenaiPassage } from "../hooks/useOpenaiPassage";
 
 const DEFAULT_LANGUAGE_LEVEL: LanguageLevel = "A1";
 
-export function PassageProvider({ children }: PropsWithChildren) {
+interface Props {
+  useFake?: boolean;
+}
+
+export function PassageProvider({
+  children,
+  useFake,
+}: PropsWithChildren<Props>) {
   const [sourceWords, setSourceWords] = useState<string[]>();
   const [passage, setPassage] = useState<string>();
   const [isGenerating, setIsGenerating] = useState(false);
-  const { generate: generateOpenaiText } = useOpenaiPassage({ useFake: true });
+  const { generate: generateOpenaiText } = useOpenaiPassage({ useFake });
 
   const generate = async ({ words, languageLevel }: GenerateProps) => {
     try {

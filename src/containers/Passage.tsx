@@ -1,12 +1,10 @@
 import { TextPassage } from "../components/TextPassage";
-import { useLanguageLevel } from "../contexts/LanguageLevelContext";
 import { useWordsMarker } from "../contexts/WordMarkerContext";
 import { usePassage } from "../contexts/PassageContext";
 import { useWordLookup } from "../hooks/useWordLookup";
 
 export function Passage() {
-  const { languageLevel } = useLanguageLevel();
-  const { passage, isGenerating } = usePassage({ languageLevel });
+  const { passage, isGenerating } = usePassage();
   const { words: markedWords, toggleWordMark } = useWordsMarker();
   const { lookup } = useWordLookup();
 
