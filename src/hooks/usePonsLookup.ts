@@ -13,10 +13,12 @@ export function usePonsLookup() {
 
     const response = await result.json();
     const entry = response?.[0]?.hits?.[0].roms?.[0];
+    const meaning = entry?.arabs?.[0].translations?.[0].source;
 
     return {
       word: entry?.headword,
-      meaning: entry?.headword_full,
+      details: entry?.headword_full,
+      meaning,
     };
   };
 

@@ -11,7 +11,6 @@ export function WordLookup() {
   const [entries, setEntries] = useState<WordLookupEntry[]>([]);
 
   const fetchEntries = async () => {
-    console.log("fetchEntries", words);
     const newWords = words.filter(
       (word) => !entries.find((e) => e.word === word)
     );
@@ -27,7 +26,6 @@ export function WordLookup() {
   };
 
   useEffect(() => {
-    console.log("useEffect", words);
     if (words.length > 0) {
       fetchEntries();
     }

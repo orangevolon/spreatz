@@ -1,4 +1,5 @@
 export interface WordLookupEntry {
   word: string;
-  meaning: string;
+  details: string;
+  meaning?: string;
 }

@@ -9,12 +9,19 @@ interface Props extends ComponentProps<typeof View> {
     title: string;
     disabled?: boolean;
   };
+  contentStyle?: ComponentProps<typeof View>["style"];
 }
 
-export function Layout({ children, style, button, ...rest }: Props) {
+export function Layout({
+  children,
+  style,
+  contentStyle,
+  button,
+  ...rest
+}: Props) {
   return (
     <View style={[styles.container, style]} {...rest}>
-      <View style={styles.content}>{children}</View>
+      <View style={[styles.content, contentStyle]}>{children}</View>
       <Button style={styles.button} {...button} />
     </View>
   );

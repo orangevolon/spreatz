@@ -54,6 +54,7 @@ const styles = StyleSheet.create({
     marginBottom: theme.spacing.m,
   },
   passage: {
+    marginBottom: theme.spacing.s,
     flex: 0.5,
   },
   wordLookup: {

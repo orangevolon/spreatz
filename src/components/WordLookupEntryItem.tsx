@@ -1,6 +1,8 @@
-import { View, Text, StyleSheet } from "react-native";
+import { Text, StyleSheet, View } from "react-native";
 import { WordLookupEntry } from "../types/wordLookup";
 import { theme } from "../ui/theme";
+import RenderHtml from "react-native-render-html";
+import { Card } from "../ui";
 
 interface Props {
   entry: WordLookupEntry;
@@ -8,21 +10,27 @@ interface Props {
 
 export function WordLookupEntryItem({ entry }: Props) {
   return (
-    <View style={styles.container}>
-      <Text style={styles.word}>{entry.word}</Text>
-      <Text style={styles.meaning}>{entry.meaning}</Text>
-    </View>
+    <Card style={styles.container}>
+      <Text style={[styles.word, styles.block]}>{entry.word}</Text>
+      <View style={styles.block}>
+        <RenderHtml source={{ html: entry.details }} />
+      </View>
+      <View style={styles.block}>
+        <RenderHtml source={{ html: entry.meaning }} />
+      </View>
+    </Card>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     padding: theme.spacing.m,
+    marginBottom: theme.spacing.s,
   },
   word: {
     ...theme.typography.large,
   },
-  meaning: {
-    ...theme.typography.medium,
+  block: {
+    marginBottom: theme.spacing.s,
   },
 });
