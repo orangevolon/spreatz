@@ -1,7 +1,9 @@
+import { WordLookupEntry } from "../types/wordLookup";
+
 const API_BASE_URL = "https://api.pons.com/v1/dictionary";
 
 export function usePonsLookup() {
-  const lookup = async (word: string) => {
+  const lookup = async (word: string): Promise<WordLookupEntry> => {
     const query = `${API_BASE_URL}?l=dedx&q=${word}`;
     const result = await fetch(query, {
       headers: {
@@ -9,7 +11,13 @@ export function usePonsLookup() {
       },
     });
 
-    const text = await result.json();
+    const response = await result.json();
+    const entry = response?.[0]?.hits?.[0].roms?.[0];
+
+    return {
+      word: entry?.headword,
+      meaning: entry?.headword_full,
+    };
   };
 
   return { lookup };

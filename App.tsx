@@ -1,20 +1,22 @@
 import "react-native-url-polyfill/auto";
 
 import { SafeAreaView, StyleSheet, Text, View } from "react-native";
-import { Passage } from "./src/components/Passage";
 import { theme } from "./src/ui/theme";
-import { Main } from "./src/components/Main";
 import { LanguageLevelProvider } from "./src/contexts/LanguageLevelContext";
 import { WordsProvider } from "./src/contexts/WordsContext";
+import { Home } from "./src/screens/Home";
+import { WordMarkerProvider } from "./src/contexts/WordMarkerContext";
 
 export default function App() {
   return (
     <LanguageLevelProvider>
-      <WordsProvider>
-        <SafeAreaView style={styles.container}>
-          <Main />
-        </SafeAreaView>
-      </WordsProvider>
+      <WordMarkerProvider>
+        <WordsProvider>
+          <SafeAreaView style={styles.container}>
+            <Home />
+          </SafeAreaView>
+        </WordsProvider>
+      </WordMarkerProvider>
     </LanguageLevelProvider>
   );
 }

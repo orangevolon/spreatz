@@ -1,6 +1,6 @@
 import { createContext, PropsWithChildren, useContext, useState } from "react";
-import { useWordsMarker } from "../hooks/useWordPick";
 import { useWordsRegistry } from "../hooks/useWordsRegistry";
+import { useWordsMarker } from "./WordMarkerContext";
 
 export interface WordsContextType {
   pickedWords: string[];

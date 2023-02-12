@@ -1,15 +1,15 @@
-import { useEffect } from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { useLanguageLevel } from "../contexts/LanguageLevelContext";
 import { useWords } from "../contexts/WordsContext";
 import { usePassage } from "../hooks/usePassage";
 import { useWordLookup } from "../hooks/useWordLookup";
 import { theme } from "../ui/theme";
-import { LanguageLevel } from "./LanguageLevel";
-import { Layout } from "./Layout";
-import { Passage } from "./Passage";
+import { LanguageLevel } from "../components/LanguageLevel";
+import { Layout } from "../components/Layout";
+import { Passage } from "../components/Passage";
+import { WordLookup } from "../containers/WordLookup";
 
-export function Main() {
+export function Home() {
   const { languageLevel } = useLanguageLevel();
   const { markedWords, toggleWordMark, pickNewWords } = useWords();
   const { passage, generate, isGenerating } = usePassage({ languageLevel });
@@ -42,6 +42,9 @@ export function Main() {
         markedWords={markedWords}
         onWordMark={handleWordMark}
       />
+      <View style={styles.wordLookup}>
+        <WordLookup />
+      </View>
     </Layout>
   );
 }
@@ -51,6 +54,9 @@ const styles = StyleSheet.create({
     marginBottom: theme.spacing.m,
   },
   passage: {
+    flex: 0.5,
+  },
+  wordLookup: {
     flex: 0.5,
   },
 });
