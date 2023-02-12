@@ -1,4 +1,27 @@
-import { Reducer, useReducer } from "react";
+import {
+  createContext,
+  PropsWithChildren,
+  useContext,
+  useReducer,
+} from "react";
+
+export interface WordMarkerContextType {
+  words: string[];
+  addWord: (word: string) => void;
+  removeWord: (word: string) => void;
+  toggleWordMark: (word: string) => void;
+  clearMarks: () => void;
+}
+
+const defaultValue: WordMarkerContextType = {
+  words: [],
+  addWord: () => {},
+  removeWord: () => {},
+  toggleWordMark: () => {},
+  clearMarks: () => {},
+};
+
+export const WordMarkerContext = createContext(defaultValue);
 
 type WordPickAction =
   | {
@@ -16,8 +39,6 @@ type WordPickAction =
   | {
       type: "CLEAR_MARKS";
     };
-
-const defaultValue = new Set<string>();
 
 function wordReducer(state: Set<string>, action: WordPickAction) {
   const newSet = new Set(state);
@@ -45,8 +66,8 @@ function wordReducer(state: Set<string>, action: WordPickAction) {
   }
 }
 
-export function useWordsMarker() {
-  const [state, dispatch] = useReducer(wordReducer, defaultValue);
+export function WordMarkerProvider({ children }: PropsWithChildren) {
+  const [state, dispatch] = useReducer(wordReducer, new Set<string>());
 
   const words = Array.from(state);
   const addWord = (word) => dispatch({ type: "ADD_WORD_MARK", word });
@@ -54,11 +75,19 @@ export function useWordsMarker() {
   const toggleWordMark = (word) => dispatch({ type: "TOGGLE_WORD_MARK", word });
   const clearMarks = () => dispatch({ type: "CLEAR_MARKS" });
 
-  return {
+  const value = {
     words,
     addWord,
     removeWord,
     toggleWordMark,
     clearMarks,
   };
+
+  return (
+    <WordMarkerContext.Provider value={value}>
+      {children}
+    </WordMarkerContext.Provider>
+  );
 }
+
+export const useWordsMarker = () => useContext(WordMarkerContext);

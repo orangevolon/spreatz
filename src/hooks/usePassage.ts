@@ -11,7 +11,7 @@ interface Props {
 export function usePassage({ languageLevel }: Props) {
   const [passage, setPassage] = useState<string>();
   const [isGenerating, setIsGenerating] = useState(false);
-  const { generate: generateOpenaiText } = useOpenaiPassage({ useFake: false });
+  const { generate: generateOpenaiText } = useOpenaiPassage({ useFake: true });
 
   const generate = async (words: string[]) => {
     try {
