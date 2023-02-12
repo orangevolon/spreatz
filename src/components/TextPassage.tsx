@@ -10,7 +10,7 @@ interface Props extends ComponentProps<typeof Card> {
   onWordMark: (word: string) => void;
 }
 
-export function Passage({
+export function TextPassage({
   isLoading,
   text,
   style,

@@ -1,63 +1,34 @@
-import { StyleSheet, View } from "react-native";
-import { useLanguageLevel } from "../contexts/LanguageLevelContext";
-import { useWords } from "../contexts/WordsContext";
-import { usePassage } from "../hooks/usePassage";
-import { useWordLookup } from "../hooks/useWordLookup";
-import { theme } from "../ui/theme";
-import { LanguageLevel } from "../components/LanguageLevel";
+import { LanguageLevel } from "../containers/LanguageLevel";
 import { Layout } from "../components/Layout";
-import { Passage } from "../components/Passage";
 import { WordLookup } from "../containers/WordLookup";
+import { Passage } from "../containers/Passage";
+import { Section } from "../ui/Section";
+import { useGenerate } from "../hooks/useGenerate";
+
+function HomeSection({ children }) {
+  return <Section gap="m">{children}</Section>;
+}
 
 export function Home() {
-  const { languageLevel } = useLanguageLevel();
-  const { markedWords, toggleWordMark, pickNewWords } = useWords();
-  const { passage, generate, isGenerating } = usePassage({ languageLevel });
-  const { lookup } = useWordLookup();
-
-  const handleGeneratePress = () => {
-    const newWords = pickNewWords();
-    generate(newWords);
-  };
-
-  const handleWordMark = async (word: string) => {
-    toggleWordMark(word);
-
-    await lookup(word);
-  };
+  const { isGenerating, generate } = useGenerate();
 
   return (
     <Layout
       button={{
-        onPress: handleGeneratePress,
+        onPress: generate,
         title: "Generate",
         disabled: isGenerating,
       }}
     >
-      <LanguageLevel style={styles.languageLevel} />
-      <Passage
-        text={passage}
-        isLoading={isGenerating}
-        style={styles.passage}
-        markedWords={markedWords}
-        onWordMark={handleWordMark}
-      />
-      <View style={styles.wordLookup}>
+      <HomeSection>
+        <LanguageLevel />
+      </HomeSection>
+      <HomeSection>
+        <Passage />
+      </HomeSection>
+      <HomeSection>
         <WordLookup />
-      </View>
+      </HomeSection>
     </Layout>
   );
 }
-
-const styles = StyleSheet.create({
-  languageLevel: {
-    marginBottom: theme.spacing.m,
-  },
-  passage: {
-    marginBottom: theme.spacing.s,
-    flex: 0.5,
-  },
-  wordLookup: {
-    flex: 0.5,
-  },
-});
