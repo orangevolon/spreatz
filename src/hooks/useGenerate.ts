@@ -16,6 +16,14 @@ export function useGenerate() {
     const wordsToDemote =
       sourceWords?.filter((word) => !markedWords.includes(word)) ?? [];
 
+    console.log(
+      "here",
+      "wordsToPromote",
+      wordsToPromote,
+      "wordsToDemote",
+      wordsToDemote
+    );
+
     promoteWords(wordsToPromote);
     demoteWords(wordsToDemote);
   };

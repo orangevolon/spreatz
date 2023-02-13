@@ -71,6 +71,7 @@ export function WordsChestProvider({
   children: React.ReactNode;
 }) {
   const [words, dispatch] = useReducer(wordsRegistryReducer, defaultState);
+  console.log("here", "words", words);
 
   const promoteWords = (words: string[]) =>
     dispatch({ type: "PROMOTE_WORDS", words });
