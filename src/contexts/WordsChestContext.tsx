@@ -13,6 +13,10 @@ type WordsRegistryAction =
   | {
       type: "SET_WORDS";
       words: Map<string, number>;
+    }
+  | {
+      type: "REMOVE_WORD";
+      word: string;
     };
 
 const MIN_WORD_WEIGHT = 1;
@@ -57,6 +61,12 @@ function wordsRegistryReducer(
       return newMap;
     }
 
+    case "REMOVE_WORD": {
+      const newMap = new Map(state);
+      newMap.delete(action.word);
+      return newMap;
+    }
+
     case "SET_WORDS": {
       return new Map(action.words);
     }
@@ -66,12 +76,14 @@ export interface WordsChestContextType {
   words: Map<string, number>;
   promoteWords: (words: string[]) => void;
   demoteWords: (words: string[]) => void;
+  removeWord: (word: string) => void;
 }
 
 const defaultValue: WordsChestContextType = {
   words: new Map<string, number>(),
   promoteWords: () => {},
   demoteWords: () => {},
+  removeWord: () => {},
 };
 
 export function WordsChestProvider({
@@ -86,6 +98,7 @@ export function WordsChestProvider({
     dispatch({ type: "PROMOTE_WORDS", words });
   const demoteWords = (words: string[]) =>
     dispatch({ type: "DEMOTE_WORDS", words });
+  const removeWord = (word: string) => dispatch({ type: "REMOVE_WORD", word });
   const setWords = (words: Map<string, number>) =>
     dispatch({ type: "SET_WORDS", words });
 
@@ -113,6 +126,7 @@ export function WordsChestProvider({
 
   const value = {
     words,
+    removeWord,
     promoteWords,
     demoteWords,
   };
