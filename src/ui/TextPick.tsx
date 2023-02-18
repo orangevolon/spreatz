@@ -1,4 +1,4 @@
-import { ComponentProps, useMemo } from "react";
+import { ComponentProps, Fragment, useMemo } from "react";
 import { Pressable, StyleSheet, View } from "react-native";
 import { sanitizeWord } from "../utils/sanitizeWord";
 import { Text } from "./Text";
@@ -42,10 +42,9 @@ export function TextPick({
         const arrayKey = `${word}-${index}`;
 
         return (
-          <>
+          <Fragment key={arrayKey}>
             <Pressable
               onPress={() => handleWordPick(word, index)}
-              key={arrayKey}
               style={({ pressed }) => [
                 styles.wordBase,
                 pressed ? styles.wordPressed : undefined,
@@ -56,7 +55,7 @@ export function TextPick({
               <Text>{word}</Text>
             </Pressable>
             {WHITESPACE}
-          </>
+          </Fragment>
         );
       });
   }, [children, pickedWords]);

@@ -14,6 +14,7 @@ export function useStorage<TData>() {
   const save = async (key: string, value: TData) => {
     try {
       const stringifiedData = JSON.stringify(value);
+      console.log("Storage saving", key, value);
       await AsyncStorage.setItem(key, stringifiedData);
     } catch (error) {
       handleError(error);
