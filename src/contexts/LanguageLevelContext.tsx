@@ -23,16 +23,14 @@ const defaultValue: LanguageLevelContextType = {
 
 export const LanguageLevelContext = createContext(defaultValue);
 
-const LANGUAGE_LEVEL_STORAGE_KEY = "LANGUAGE_LEVEL";
-
 export function LanguageLevelProvider({ children }: PropsWithChildren) {
-  const { retrieve, save } = useStorage<LanguageLevel>();
+  const { retrieve, saveIfChanged } = useStorage("LANGUAGE_LEVEL_STORAGE_KEY");
   const [languageLevel, setLanguageLevel] = useState<LanguageLevel>();
   const [isLoading, setIsLoading] = useState(false);
 
   const retrieveLanguageLevel = async () => {
     setIsLoading(true);
-    const languageLevel = await retrieve(LANGUAGE_LEVEL_STORAGE_KEY);
+    const languageLevel = await retrieve();
 
     if (languageLevel) {
       setLanguageLevel(languageLevel);
@@ -41,19 +39,13 @@ export function LanguageLevelProvider({ children }: PropsWithChildren) {
     setIsLoading(false);
   };
 
-  const saveLanguageLevel = async () => {
-    if (languageLevel) {
-      await save(LANGUAGE_LEVEL_STORAGE_KEY, languageLevel);
-    }
-  };
-
   useEffect(() => {
     retrieveLanguageLevel();
-
-    return () => {
-      saveLanguageLevel();
-    };
   }, []);
+
+  useEffect(() => {
+    saveIfChanged(languageLevel);
+  }, [languageLevel]);
 
   return (
     <LanguageLevelContext.Provider
