@@ -1,4 +1,4 @@
-import { createContext, useContext, useReducer } from "react";
+import { createContext, useContext, useEffect, useReducer } from "react";
 
 type WordsRegistryAction =
   | {
@@ -71,12 +71,19 @@ export function WordsChestProvider({
   children: React.ReactNode;
 }) {
   const [words, dispatch] = useReducer(wordsRegistryReducer, defaultState);
-  console.log("here", "words", words);
 
   const promoteWords = (words: string[]) =>
     dispatch({ type: "PROMOTE_WORDS", words });
   const demoteWords = (words: string[]) =>
     dispatch({ type: "DEMOTE_WORDS", words });
+
+  useEffect(() => {
+    const topTenWords = [...words.entries()]
+      .sort(([, weight1], [, weight2]) => weight2 - weight1)
+      .slice(0, 10);
+
+    console.table(topTenWords);
+  }, [words]);
 
   const value = {
     words,

@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useLanguageLevel } from "../contexts/LanguageLevelContext";
 import { usePassage } from "../contexts/PassageContext";
 import { useWordsMarker } from "../contexts/WordMarkerContext";
@@ -16,14 +17,6 @@ export function useGenerate() {
     const wordsToDemote =
       sourceWords?.filter((word) => !markedWords.includes(word)) ?? [];
 
-    console.log(
-      "here",
-      "wordsToPromote",
-      wordsToPromote,
-      "wordsToDemote",
-      wordsToDemote
-    );
-
     promoteWords(wordsToPromote);
     demoteWords(wordsToDemote);
   };
@@ -40,9 +33,12 @@ export function useGenerate() {
   const generate = () => {
     updateWordsChest();
     clearMarks();
+  };
+
+  useEffect(() => {
     const words = drawWordsFromChest();
     generatePassage({ words, languageLevel });
-  };
+  }, [savedWords]);
 
   return {
     generate,
