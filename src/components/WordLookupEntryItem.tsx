@@ -1,4 +1,4 @@
-import { Text, StyleSheet, View } from "react-native";
+import { Text, StyleSheet, View, useWindowDimensions } from "react-native";
 import { WordLookupEntry } from "../types/wordLookup";
 import { theme } from "../ui/theme";
 import RenderHtml from "react-native-render-html";
@@ -9,14 +9,16 @@ interface Props {
 }
 
 export function WordLookupEntryItem({ entry }: Props) {
+  const { width } = useWindowDimensions();
+
   return (
     <Card style={styles.container}>
       <Text style={[styles.word, styles.block]}>{entry.word}</Text>
       <View style={styles.block}>
-        <RenderHtml source={{ html: entry.details }} />
+        <RenderHtml contentWidth={width} source={{ html: entry.details }} />
       </View>
       <View style={styles.block}>
-        <RenderHtml source={{ html: entry.meaning }} />
+        <RenderHtml contentWidth={width} source={{ html: entry.meaning }} />
       </View>
     </Card>
   );

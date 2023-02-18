@@ -18,11 +18,14 @@ export function PassageProvider({
   const [isGenerating, setIsGenerating] = useState(false);
   const { generate: generateOpenaiText } = useOpenaiPassage({ useFake });
 
-  console.log("here", "source words", sourceWords);
-  
   const generate = async ({ words, languageLevel }: GenerateProps) => {
     try {
-      console.log("here", "generate with these words:", sourceWords);
+      if (words && words.length) {
+        console.log("Generating passage with words: ", words.join(", "));
+      } else {
+        console.log("Generating with no initial words");
+      }
+
       setSourceWords(words);
       setIsGenerating(true);
       const text = await generateOpenaiText({

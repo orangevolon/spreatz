@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useReducer } from "react";
+import { useStorage } from "../hooks/useStorage";
 
 type WordsRegistryAction =
   | {
@@ -8,6 +9,10 @@ type WordsRegistryAction =
   | {
       type: "DEMOTE_WORDS";
       words: string[];
+    }
+  | {
+      type: "SET_WORDS";
+      words: Map<string, number>;
     };
 
 const MIN_WORD_WEIGHT = 1;
@@ -17,10 +22,9 @@ function wordsRegistryReducer(
   state: Map<string, number>,
   action: WordsRegistryAction
 ) {
-  const newMap = new Map(state);
-
   switch (action.type) {
     case "PROMOTE_WORDS": {
+      const newMap = new Map(state);
       for (const word of action.words) {
         const wordWeight = newMap.get(word);
 
@@ -35,6 +39,7 @@ function wordsRegistryReducer(
     }
 
     case "DEMOTE_WORDS": {
+      const newMap = new Map(state);
       for (const word of action.words) {
         if (!newMap.has(word)) {
           return newMap;
@@ -50,6 +55,10 @@ function wordsRegistryReducer(
       }
 
       return newMap;
+    }
+
+    case "SET_WORDS": {
+      return new Map(action.words);
     }
   }
 }
@@ -71,11 +80,14 @@ export function WordsChestProvider({
   children: React.ReactNode;
 }) {
   const [words, dispatch] = useReducer(wordsRegistryReducer, defaultState);
+  const { saveIfChanged, retrieve } = useStorage("WORDS_CHEST");
 
   const promoteWords = (words: string[]) =>
     dispatch({ type: "PROMOTE_WORDS", words });
   const demoteWords = (words: string[]) =>
     dispatch({ type: "DEMOTE_WORDS", words });
+  const setWords = (words: Map<string, number>) =>
+    dispatch({ type: "SET_WORDS", words });
 
   useEffect(() => {
     const topTenWords = [...words.entries()]
@@ -84,6 +96,20 @@ export function WordsChestProvider({
 
     console.table(topTenWords);
   }, [words]);
+
+  useEffect(() => {
+    retrieveWords();
+  }, []);
+
+  useEffect(() => {
+    saveIfChanged(Object.fromEntries(words));
+  }, [words]);
+
+  const retrieveWords = async () => {
+    const wordsObject = await retrieve();
+    const wordsMap = new Map(Object.entries(wordsObject));
+    setWords(wordsMap);
+  };
 
   const value = {
     words,
