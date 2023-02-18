@@ -9,6 +9,11 @@ interface Props extends ComponentProps<typeof View> {
     title: string;
     disabled?: boolean;
   };
+  secondaryButton?: {
+    onPress: () => void;
+    title: string;
+    disabled?: boolean;
+  };
   contentStyle?: ComponentProps<typeof View>["style"];
 }
 
@@ -17,12 +22,18 @@ export function Layout({
   style,
   contentStyle,
   button,
+  secondaryButton,
   ...rest
 }: Props) {
   return (
     <View style={[styles.container, style]} {...rest}>
       <View style={[styles.content, contentStyle]}>{children}</View>
-      <Button style={styles.button} {...button} />
+      <View style={styles.buttonsContainer}>
+        {secondaryButton ? (
+          <Button style={styles.secondaryButton} {...secondaryButton} />
+        ) : null}
+        <Button style={styles.button} {...button} />
+      </View>
     </View>
   );
 }
@@ -35,7 +46,15 @@ const styles = StyleSheet.create({
   content: {
     flex: 1,
   },
-  button: {
+  buttonsContainer: {
     marginTop: theme.spacing.m,
+    flexDirection: "row",
+  },
+  button: {
+    flex: 1,
+  },
+  secondaryButton: {
+    flex: 1,
+    marginRight: theme.spacing.s,
   },
 });
