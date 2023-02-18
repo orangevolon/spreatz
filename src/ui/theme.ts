@@ -18,9 +18,15 @@ export const theme = {
     background: "#ddd",
     elevatedBackground: "#eee",
     foreground: "#111",
-    buttonBackground: "#222",
-    buttonForeground: "#eee",
     selectedWord: "#f5bda2",
+    primaryButton: {
+      background: "#222",
+      foreground: "#eee",
+    },
+    secondaryButton: {
+      background: "#eee",
+      foreground: "#222",
+    },
   },
   typography: {
     small: {

@@ -8,41 +8,62 @@ type OmitProps = "children" | "style";
 interface Props extends Omit<ComponentProps<typeof Pressable>, OmitProps> {
   title: string;
   style?: ViewStyle;
+  variant?: "primary" | "secondary";
 }
 
-export function Button({ title, style, ...rest }: Props) {
+export function Button({ title, style, variant = "primary", ...rest }: Props) {
+  const baseStyle = styles.base;
+  const variantStyle = styles[variant];
+
   return (
     <Pressable
       style={({ pressed }) => [
-        styles.button,
-        pressed ? styles.buttonPressed : undefined,
+        baseStyle.button,
+        variantStyle.button,
+        pressed ? baseStyle.buttonPressed : undefined,
         style,
       ]}
       {...rest}
     >
-      <Text variant="caption" style={styles.text}>
+      <Text variant="caption" style={[baseStyle.text, variantStyle.text]}>
         {title}
       </Text>
     </Pressable>
   );
 }
 
-const styles = StyleSheet.create({
-  button: {
-    paddingHorizontal: theme.spacing.l,
-    paddingVertical: theme.spacing.m,
-    backgroundColor: theme.color.buttonBackground,
-    alignItems: "center",
-    flexDirection: "row",
-    justifyContent: "center",
-    borderRadius: theme.radius.round,
-  },
-  buttonPressed: {
-    opacity: 0.6,
-  },
-  text: {
-    fontWeight: "bold",
-    textTransform: "uppercase",
-    color: theme.color.buttonForeground,
-  },
-});
+const styles = {
+  base: StyleSheet.create({
+    button: {
+      paddingHorizontal: theme.spacing.l,
+      paddingVertical: theme.spacing.m,
+      alignItems: "center",
+      flexDirection: "row",
+      justifyContent: "center",
+      borderRadius: theme.radius.round,
+    },
+    buttonPressed: {
+      opacity: 0.6,
+    },
+    text: {
+      fontWeight: "bold",
+      textTransform: "uppercase",
+    },
+  }),
+  primary: StyleSheet.create({
+    button: {
+      backgroundColor: theme.color.primaryButton.background,
+    },
+    text: {
+      color: theme.color.primaryButton.foreground,
+    },
+  }),
+  secondary: StyleSheet.create({
+    button: {
+      backgroundColor: theme.color.secondaryButton.background,
+    },
+    text: {
+      color: theme.color.secondaryButton.foreground,
+    },
+  }),
+};

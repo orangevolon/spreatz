@@ -30,9 +30,13 @@ export function Layout({
       <View style={[styles.content, contentStyle]}>{children}</View>
       <View style={styles.buttonsContainer}>
         {secondaryButton ? (
-          <Button style={styles.secondaryButton} {...secondaryButton} />
+          <Button
+            variant="secondary"
+            style={styles.secondaryButton}
+            {...secondaryButton}
+          />
         ) : null}
-        <Button style={styles.button} {...button} />
+        <Button variant="primary" style={styles.button} {...button} />
       </View>
     </View>
   );
