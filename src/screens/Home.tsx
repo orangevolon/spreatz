@@ -4,6 +4,7 @@ import { WordLookup } from "../containers/WordLookup";
 import { Passage } from "../containers/Passage";
 import { Section } from "../ui/Section";
 import { useGenerate } from "../hooks/useGenerate";
+import { useNavigation } from "@react-navigation/native";
 
 function HomeSection({ children }) {
   return <Section gap="m">{children}</Section>;
@@ -11,6 +12,11 @@ function HomeSection({ children }) {
 
 export function Home() {
   const { isGenerating, generate } = useGenerate();
+  const navigate = useNavigation();
+
+  const handleNavigateToWordChest = () => {
+    navigate.navigate("WordChest");
+  };
 
   return (
     <Layout
@@ -18,6 +24,10 @@ export function Home() {
         onPress: generate,
         title: "Generate",
         disabled: isGenerating,
+      }}
+      secondaryButton={{
+        onPress: handleNavigateToWordChest,
+        title: "Word Chest",
       }}
     >
       <HomeSection>

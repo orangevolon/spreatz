@@ -1,12 +1,12 @@
 import "react-native-url-polyfill/auto";
 
-import { SafeAreaView, StyleSheet, Text, View } from "react-native";
+import { SafeAreaView, StyleSheet } from "react-native";
 import { theme } from "./src/ui/theme";
 import { LanguageLevelProvider } from "./src/contexts/LanguageLevelContext";
-import { Home } from "./src/screens/Home";
 import { WordMarkerProvider } from "./src/contexts/WordMarkerContext";
 import { WordsChestProvider } from "./src/contexts/WordsChestContext";
 import { PassageProvider } from "./src/contexts/PassageContext";
+import { AppNavigator } from "./src/containers/AppNavigator";
 
 export default function App() {
   return (
@@ -15,7 +15,7 @@ export default function App() {
         <WordMarkerProvider>
           <PassageProvider useFake>
             <SafeAreaView style={styles.container}>
-              <Home />
+              <AppNavigator />
             </SafeAreaView>
           </PassageProvider>
         </WordMarkerProvider>
