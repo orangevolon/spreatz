@@ -1,4 +1,4 @@
-import { useReducer } from "react";
+import { createContext, useContext, useEffect, useReducer } from "react";
 
 type WordsRegistryAction =
   | {
@@ -53,19 +53,50 @@ function wordsRegistryReducer(
     }
   }
 }
+export interface WordsChestContextType {
+  words: Map<string, number>;
+  promoteWords: (words: string[]) => void;
+  demoteWords: (words: string[]) => void;
+}
 
-export function useWordsRegistry() {
-  const [state, dispatch] = useReducer(wordsRegistryReducer, defaultState);
+const defaultValue: WordsChestContextType = {
+  words: new Map<string, number>(),
+  promoteWords: () => {},
+  demoteWords: () => {},
+};
 
-  const words = state;
+export function WordsChestProvider({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const [words, dispatch] = useReducer(wordsRegistryReducer, defaultState);
+
   const promoteWords = (words: string[]) =>
     dispatch({ type: "PROMOTE_WORDS", words });
   const demoteWords = (words: string[]) =>
     dispatch({ type: "DEMOTE_WORDS", words });
 
-  return {
+  useEffect(() => {
+    const topTenWords = [...words.entries()]
+      .sort(([, weight1], [, weight2]) => weight2 - weight1)
+      .slice(0, 10);
+
+    console.table(topTenWords);
+  }, [words]);
+
+  const value = {
     words,
     promoteWords,
     demoteWords,
   };
+
+  return (
+    <WordsChestContext.Provider value={value}>
+      {children}
+    </WordsChestContext.Provider>
+  );
 }
+
+export const WordsChestContext = createContext(defaultValue);
+export const useWordsChest = () => useContext(WordsChestContext);

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { WordLookupEntries } from "../components/WordLookupEntries";
+import { usePassage } from "../contexts/PassageContext";
 import { useWordsMarker } from "../contexts/WordMarkerContext";
 import { useWordLookup } from "../hooks/useWordLookup";
 import { WordLookupEntry } from "../types/wordLookup";
@@ -7,10 +8,11 @@ import { WordLookupEntry } from "../types/wordLookup";
 export function WordLookup() {
   const { words } = useWordsMarker();
   const { lookup } = useWordLookup();
+  const { passage } = usePassage();
 
   const [entries, setEntries] = useState<WordLookupEntry[]>([]);
 
-  const fetchEntries = async () => {
+  const fetchNewlyMarkedWords = async () => {
     const newWords = words.filter(
       (word) => !entries.find((e) => e.word === word)
     );
@@ -27,9 +29,13 @@ export function WordLookup() {
 
   useEffect(() => {
     if (words.length > 0) {
-      fetchEntries();
+      fetchNewlyMarkedWords();
     }
   }, [words]);
+
+  useEffect(() => {
+    setEntries([]);
+  }, [passage]);
 
   return <WordLookupEntries entries={entries} />;
 }
