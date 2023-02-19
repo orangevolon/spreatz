@@ -24,7 +24,8 @@ export function TextPassage({
   return (
     <Card style={[styles.container, style]} {...rest}>
       <Text style={styles.sourceWords} variant="small">
-        Source: {sourceWords.join(", ")}
+        {/* ISSUE: sourceWords can be undefined but TS returns wrong type on useState */}
+        Source: {sourceWords?.join(", ")}
       </Text>
       {isLoading ? (
         <ActivityIndicator />

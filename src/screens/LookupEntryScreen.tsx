@@ -8,6 +8,7 @@ export function LookupEntryScreen() {
 
   return (
     <Layout button={{ onPress: goBack, title: "Back" }}>
+      {/* @ts-ignore */}
       <WordLookupEntry entry={params.entry} />
     </Layout>
   );
