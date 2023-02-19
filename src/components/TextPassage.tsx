@@ -1,12 +1,14 @@
 import { ComponentProps } from "react";
 import { ActivityIndicator, StyleSheet, View } from "react-native";
-import { Card } from "../ui";
+import { Card, Text } from "../ui";
 import { TextPick } from "../ui/TextPick";
+import { theme } from "../ui/theme";
 
 interface Props extends ComponentProps<typeof Card> {
   isLoading?: boolean;
   text: string;
   markedWords: string[];
+  sourceWords: string[];
   onWordMark: (word: string) => void;
 }
 
@@ -15,11 +17,15 @@ export function TextPassage({
   text,
   style,
   markedWords,
+  sourceWords,
   onWordMark,
   ...rest
 }: Props) {
   return (
     <Card style={[styles.container, style]} {...rest}>
+      <Text style={styles.sourceWords} variant="small">
+        Source: {sourceWords.join(", ")}
+      </Text>
       {isLoading ? (
         <ActivityIndicator />
       ) : (
@@ -38,6 +44,10 @@ export function TextPassage({
 const styles = StyleSheet.create({
   container: {
     justifyContent: "center",
-    alignItems: "center",
+    alignItems: "stretch",
+  },
+  sourceWords: {
+    marginBottom: theme.spacing.m,
+    color: theme.color.foregroundSubdued,
   },
 });

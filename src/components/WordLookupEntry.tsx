@@ -18,10 +18,14 @@ export function WordLookupEntry({ entry }: Props) {
         <RenderHtml contentWidth={width} source={{ html: entry.details }} />
       </Card>
       {entry.meanings.map((meaning) => (
-        <Card style={styles.section}>
+        <Card key={meaning.title} style={styles.section}>
           <RenderHtml contentWidth={width} source={{ html: meaning.title }} />
           {meaning.definitions.map((definition) => (
-            <RenderHtml contentWidth={width} source={{ html: definition }} />
+            <RenderHtml
+              key={definition}
+              contentWidth={width}
+              source={{ html: definition }}
+            />
           ))}
         </Card>
       ))}

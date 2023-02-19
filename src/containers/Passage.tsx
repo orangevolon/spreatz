@@ -4,7 +4,7 @@ import { usePassage } from "../contexts/PassageContext";
 import { useWordLookup } from "../hooks/useWordLookup";
 
 export function Passage() {
-  const { passage, isGenerating } = usePassage();
+  const { passage, isGenerating, sourceWords } = usePassage();
   const { words: markedWords, toggleWordMark } = useWordsMarker();
   const { lookup } = useWordLookup();
 
@@ -18,6 +18,7 @@ export function Passage() {
       text={passage}
       isLoading={isGenerating}
       markedWords={markedWords}
+      sourceWords={sourceWords}
       onWordMark={handleWordMark}
     />
   );
