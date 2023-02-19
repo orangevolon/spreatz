@@ -36,6 +36,8 @@ export function WordLookup() {
   useEffect(() => {
     if (words.length > 0) {
       fetchNewlyMarkedWords();
+    } else {
+      setEntries([]);
     }
   }, [words]);
 
