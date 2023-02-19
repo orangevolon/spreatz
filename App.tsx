@@ -13,7 +13,7 @@ export default function App() {
     <LanguageLevelProvider>
       <WordsChestProvider>
         <WordMarkerProvider>
-          <PassageProvider useFake={false}>
+          <PassageProvider useFake={true}>
             <SafeAreaView style={styles.container}>
               <AppNavigator />
             </SafeAreaView>

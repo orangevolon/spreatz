@@ -10,7 +10,7 @@ function HomeSection({ children }) {
   return <Section gap="m">{children}</Section>;
 }
 
-export function Home() {
+export function HomeScreen() {
   const { isGenerating, generate } = useGenerate();
   const navigate = useNavigation();
 
