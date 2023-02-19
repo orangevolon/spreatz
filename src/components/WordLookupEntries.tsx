@@ -1,16 +1,19 @@
-import { FlatList, ScrollView } from "react-native";
-import { WordLookupEntry } from "../types/wordLookup";
+import { FlatList } from "react-native";
+import { LookupEntry } from "../types/wordLookup";
 import { WordLookupEntryItem } from "./WordLookupEntryItem";
 
 interface Props {
-  entries: WordLookupEntry[];
+  entries: LookupEntry[];
+  onEntryPress: (entry: LookupEntry) => void;
 }
 
-export function WordLookupEntries({ entries }: Props) {
+export function WordLookupEntries({ entries, onEntryPress }: Props) {
   return (
     <FlatList
       data={entries}
-      renderItem={({ item }) => <WordLookupEntryItem entry={item} />}
+      renderItem={({ item }) => (
+        <WordLookupEntryItem entry={item} onPress={() => onEntryPress(item)} />
+      )}
     />
   );
 }

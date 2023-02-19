@@ -1,5 +1,11 @@
-export interface WordLookupEntry {
+export interface LookupEntryMeaning {
+  title: string;
+  definitions: string[];
+}
+
+export interface LookupEntry {
   word: string;
   details: string;
-  meaning?: string;
+  topDefinition?: string;
+  meanings?: LookupEntryMeaning[];
 }
