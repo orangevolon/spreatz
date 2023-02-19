@@ -30,7 +30,7 @@ export function WordLookup() {
   };
 
   const handleEntityPress = (entry: WordLookupEntry) => {
-    navigate("LookupEntry");
+    navigate("LookupEntry", { entry });
   };
 
   useEffect(() => {
