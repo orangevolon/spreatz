@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
-import { Button, Card, Text } from "../ui";
+import { Card, Text } from "../ui";
+import { FlatButton } from "../ui/FlatButton";
 import { theme } from "../ui/theme";
 
 interface Props {
@@ -13,7 +14,7 @@ export function WordChestListItem({ word, onRemove }: Props) {
       <Text variant="medium" style={styles.text}>
         {word}
       </Text>
-      <Button onPress={onRemove} title="Remove" />
+      <FlatButton onPress={onRemove} title="Remove" />
     </Card>
   );
 }

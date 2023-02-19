@@ -1,34 +1,26 @@
 import { ComponentProps } from "react";
-import { Pressable, StyleSheet, ViewStyle } from "react-native";
-import { Text } from "./Text";
+import { StyleSheet } from "react-native";
+import { ButtonBase } from "./ButtonBase";
 import { theme } from "./theme";
-
-type OmitProps = "children" | "style";
-
-interface Props extends Omit<ComponentProps<typeof Pressable>, OmitProps> {
-  title: string;
-  style?: ViewStyle;
+interface Props extends ComponentProps<typeof ButtonBase> {
   variant?: "primary" | "secondary";
 }
 
-export function Button({ title, style, variant = "primary", ...rest }: Props) {
+export function Button({
+  style,
+  textStyle,
+  variant = "primary",
+  ...rest
+}: Props) {
   const baseStyle = styles.base;
   const variantStyle = styles[variant];
 
   return (
-    <Pressable
-      style={({ pressed }) => [
-        baseStyle.button,
-        variantStyle.button,
-        pressed ? baseStyle.buttonPressed : undefined,
-        style,
-      ]}
+    <ButtonBase
+      style={[baseStyle.button, variantStyle.button, style]}
+      textStyle={[variantStyle.text, textStyle]}
       {...rest}
-    >
-      <Text variant="caption" style={[baseStyle.text, variantStyle.text]}>
-        {title}
-      </Text>
-    </Pressable>
+    />
   );
 }
 
@@ -37,17 +29,7 @@ const styles = {
     button: {
       paddingHorizontal: theme.spacing.l,
       paddingVertical: theme.spacing.m,
-      alignItems: "center",
-      flexDirection: "row",
-      justifyContent: "center",
       borderRadius: theme.radius.round,
-    },
-    buttonPressed: {
-      opacity: 0.6,
-    },
-    text: {
-      fontWeight: "bold",
-      textTransform: "uppercase",
     },
   }),
   primary: StyleSheet.create({
