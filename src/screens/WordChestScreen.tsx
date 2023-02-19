@@ -3,16 +3,12 @@ import { Layout } from "../components/Layout";
 import { WordChest } from "../containers/WordChest";
 
 export function WordChestScreen() {
-  const navigate = useNavigation();
-
-  const handleBackPress = () => {
-    navigate.goBack();
-  };
+  const { goBack } = useNavigation();
 
   return (
     <Layout
       button={{
-        onPress: handleBackPress,
+        onPress: goBack,
         title: "Back",
       }}
     >

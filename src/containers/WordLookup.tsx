@@ -1,3 +1,4 @@
+import { useNavigation } from "@react-navigation/native";
 import { useEffect, useState } from "react";
 import { WordLookupEntries } from "../components/WordLookupEntries";
 import { usePassage } from "../contexts/PassageContext";
@@ -9,6 +10,7 @@ export function WordLookup() {
   const { words } = useWordsMarker();
   const { lookup } = useWordLookup();
   const { passage } = usePassage();
+  const { navigate } = useNavigation();
 
   const [entries, setEntries] = useState<WordLookupEntry[]>([]);
 
@@ -27,6 +29,10 @@ export function WordLookup() {
     });
   };
 
+  const handleEntityPress = (entry: WordLookupEntry) => {
+    navigate("LookupEntry");
+  };
+
   useEffect(() => {
     if (words.length > 0) {
       fetchNewlyMarkedWords();
@@ -37,5 +43,7 @@ export function WordLookup() {
     setEntries([]);
   }, [passage]);
 
-  return <WordLookupEntries entries={entries} />;
+  return (
+    <WordLookupEntries entries={entries} onEntryPress={handleEntityPress} />
+  );
 }

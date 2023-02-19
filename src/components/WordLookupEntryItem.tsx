@@ -6,13 +6,14 @@ import { Card } from "../ui";
 
 interface Props {
   entry: WordLookupEntry;
+  onPress: () => void;
 }
 
-export function WordLookupEntryItem({ entry }: Props) {
+export function WordLookupEntryItem({ entry, onPress }: Props) {
   const { width } = useWindowDimensions();
 
   return (
-    <Card style={styles.container}>
+    <Card style={styles.container} onPress={onPress}>
       <Text style={[styles.word, styles.block]}>{entry.word}</Text>
       <View style={styles.block}>
         <RenderHtml contentWidth={width} source={{ html: entry.details }} />
