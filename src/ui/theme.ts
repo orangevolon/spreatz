@@ -18,6 +18,7 @@ export const theme = {
     background: "#ddd",
     elevatedBackground: "#eee",
     foreground: "#111",
+    foregroundSubdued: "#555",
     selectedWord: "#f5bda2",
     primaryButton: {
       background: "#222",
