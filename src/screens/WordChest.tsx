@@ -1,8 +1,8 @@
 import { useNavigation } from "@react-navigation/native";
-import { Text } from "react-native";
 import { Layout } from "../components/Layout";
+import { WordChest } from "../containers/WordChest";
 
-export function WordChest() {
+function WordChestScreen() {
   const navigate = useNavigation();
 
   const handleBackPress = () => {
@@ -16,7 +16,9 @@ export function WordChest() {
         title: "Back",
       }}
     >
-      <Text>WordChest</Text>
+      <WordChest />
     </Layout>
   );
 }
+
+export { WordChestScreen as WordChest };
