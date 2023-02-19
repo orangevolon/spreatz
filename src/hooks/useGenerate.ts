@@ -35,10 +35,13 @@ export function useGenerate() {
     clearMarks();
   };
 
+  // TODO: Change the behavior from reactive to imperative
   useEffect(() => {
-    const words = drawWordsFromChest();
-    generatePassage({ words, languageLevel });
-  }, [savedWords]);
+    if (savedWords && languageLevel) {
+      const words = drawWordsFromChest();
+      generatePassage({ words, languageLevel });
+    }
+  }, [savedWords, languageLevel]);
 
   return {
     generate,

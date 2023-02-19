@@ -21,9 +21,13 @@ export function PassageProvider({
   const generate = async ({ words, languageLevel }: GenerateProps) => {
     try {
       if (words && words.length) {
-        console.log("Generating passage with words: ", words.join(", "));
+        console.log(
+          `Generating ${languageLevel} passage with words: ${words.join(", ")}`
+        );
       } else {
-        console.log("Generating with no initial words");
+        console.log(
+          `Generating ${languageLevel} passage with no initial words`
+        );
       }
 
       setSourceWords(words);

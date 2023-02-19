@@ -9,6 +9,8 @@ import {
 import { useStorage } from "../hooks/useStorage";
 import { LanguageLevel } from "../types";
 
+export const DEFAULT_LANGUAGE_LEVEL: LanguageLevel = "A1";
+
 export interface LanguageLevelContextType {
   languageLevel: LanguageLevel;
   setLanguageLevel: (level: LanguageLevel) => void;
@@ -17,7 +19,7 @@ export interface LanguageLevelContextType {
 
 const defaultValue: LanguageLevelContextType = {
   setLanguageLevel: () => {},
-  languageLevel: "A1",
+  languageLevel: undefined,
   isLoading: false,
 };
 
@@ -30,11 +32,9 @@ export function LanguageLevelProvider({ children }: PropsWithChildren) {
 
   const retrieveLanguageLevel = async () => {
     setIsLoading(true);
-    const languageLevel = await retrieve();
 
-    if (languageLevel) {
-      setLanguageLevel(languageLevel);
-    }
+    const languageLevel = await retrieve();
+    setLanguageLevel(languageLevel ?? DEFAULT_LANGUAGE_LEVEL);
 
     setIsLoading(false);
   };
