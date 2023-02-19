@@ -15,6 +15,7 @@ export function HomeScreen() {
   const navigate = useNavigation();
 
   const handleNavigateToWordChest = () => {
+    // @ts-ignore
     navigate.navigate("WordChest");
   };
 

@@ -30,6 +30,7 @@ export function WordLookup() {
   };
 
   const handleEntityPress = (entry: LookupEntry) => {
+    // @ts-ignore
     navigate("LookupEntry", { entry });
   };
 
