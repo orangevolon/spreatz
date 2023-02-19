@@ -14,11 +14,17 @@ export function usePonsLookup() {
     const response = await result.json();
     const entry = response?.[0]?.hits?.[0].roms?.[0];
     const meaning = entry?.arabs?.[0].translations?.[0].source;
+    const meanings = entry?.arabs?.map((arab) => ({
+      title: arab.header,
+      definitions:
+        arab.translations?.map((translation) => translation.source) ?? [],
+    }));
 
     return {
       word: entry?.headword,
       details: entry?.headword_full,
       meaning,
+      meanings,
     };
   };
 

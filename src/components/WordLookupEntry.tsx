@@ -17,9 +17,14 @@ export function WordLookupEntry({ entry }: Props) {
         <Text variant="large">{entry.word}</Text>
         <RenderHtml contentWidth={width} source={{ html: entry.details }} />
       </Card>
-      <Card style={styles.section}>
-        <RenderHtml contentWidth={width} source={{ html: entry.meaning }} />
-      </Card>
+      {entry.meanings.map((meaning) => (
+        <Card style={styles.section}>
+          <RenderHtml contentWidth={width} source={{ html: meaning.title }} />
+          {meaning.definitions.map((definition) => (
+            <RenderHtml contentWidth={width} source={{ html: definition }} />
+          ))}
+        </Card>
+      ))}
     </ScrollView>
   );
 }
