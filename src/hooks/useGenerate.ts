@@ -4,6 +4,7 @@ import { usePassage } from "../contexts/PassageContext";
 import { useWordsMarker } from "../contexts/WordMarkerContext";
 import { useWordsChest } from "../contexts/WordsChestContext";
 
+const WORD_DRAW_THRESHOLD = 5;
 const WORD_PICK_THRESHOLD = 1;
 
 export function useGenerate() {
@@ -24,10 +25,13 @@ export function useGenerate() {
   const drawWordsFromChest = () => {
     const newWords = [...savedWords.entries()]
       .sort(([, weight1], [, weight2]) => weight2 - weight1)
-      .slice(0, WORD_PICK_THRESHOLD)
+      .slice(0, WORD_DRAW_THRESHOLD)
       .map(([word]) => word);
 
-    return newWords;
+    const sourceWord =
+      newWords[Math.floor(Math.random() * Math.floor(newWords.length))];
+
+    return [sourceWord];
   };
 
   const generate = () => {
