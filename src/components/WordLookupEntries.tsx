@@ -1,10 +1,10 @@
 import { FlatList } from "react-native";
-import { WordLookupEntry } from "../types/wordLookup";
+import { LookupEntry } from "../types/wordLookup";
 import { WordLookupEntryItem } from "./WordLookupEntryItem";
 
 interface Props {
-  entries: WordLookupEntry[];
-  onEntryPress: (entry: WordLookupEntry) => void;
+  entries: LookupEntry[];
+  onEntryPress: (entry: LookupEntry) => void;
 }
 
 export function WordLookupEntries({ entries, onEntryPress }: Props) {

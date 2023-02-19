@@ -1,11 +1,11 @@
 import { Text, StyleSheet, View, useWindowDimensions } from "react-native";
-import { WordLookupEntry } from "../types/wordLookup";
+import { LookupEntry } from "../types/wordLookup";
 import { theme } from "../ui/theme";
 import RenderHtml from "react-native-render-html";
 import { Card } from "../ui";
 
 interface Props {
-  entry: WordLookupEntry;
+  entry: LookupEntry;
   onPress: () => void;
 }
 
@@ -19,7 +19,7 @@ export function WordLookupEntryItem({ entry, onPress }: Props) {
         <RenderHtml contentWidth={width} source={{ html: entry.details }} />
       </View>
       <View style={styles.block}>
-        <RenderHtml contentWidth={width} source={{ html: entry.meaning }} />
+        <RenderHtml contentWidth={width} source={{ html: entry.topDefinition }} />
       </View>
     </Card>
   );

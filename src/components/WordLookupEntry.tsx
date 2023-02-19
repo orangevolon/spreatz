@@ -1,4 +1,4 @@
-import { WordLookupEntry as WordLookupEntryType } from "../types/wordLookup";
+import { LookupEntry as WordLookupEntryType } from "../types/wordLookup";
 import { Card, Text } from "../ui";
 import RenderHtml from "react-native-render-html";
 import { ScrollView, useWindowDimensions, StyleSheet } from "react-native";
