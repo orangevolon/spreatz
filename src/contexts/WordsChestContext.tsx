@@ -1,21 +1,21 @@
-import { createContext, useContext, useEffect, useReducer } from "react";
-import { useStorage } from "../hooks/useStorage";
+import { createContext, useContext, useEffect, useReducer } from 'react';
+import { useStorage } from '../hooks/useStorage';
 
 type WordsRegistryAction =
   | {
-      type: "PROMOTE_WORDS";
+      type: 'PROMOTE_WORDS';
       words: string[];
     }
   | {
-      type: "DEMOTE_WORDS";
+      type: 'DEMOTE_WORDS';
       words: string[];
     }
   | {
-      type: "SET_WORDS";
+      type: 'SET_WORDS';
       words: Map<string, number>;
     }
   | {
-      type: "REMOVE_WORD";
+      type: 'REMOVE_WORD';
       word: string;
     };
 
@@ -27,7 +27,7 @@ function wordsRegistryReducer(
   action: WordsRegistryAction
 ) {
   switch (action.type) {
-    case "PROMOTE_WORDS": {
+    case 'PROMOTE_WORDS': {
       const newMap = new Map(state);
       for (const word of action.words) {
         const wordWeight = newMap.get(word);
@@ -42,7 +42,7 @@ function wordsRegistryReducer(
       return newMap;
     }
 
-    case "DEMOTE_WORDS": {
+    case 'DEMOTE_WORDS': {
       const newMap = new Map(state);
       for (const word of action.words) {
         if (!newMap.has(word)) {
@@ -61,13 +61,13 @@ function wordsRegistryReducer(
       return newMap;
     }
 
-    case "REMOVE_WORD": {
+    case 'REMOVE_WORD': {
       const newMap = new Map(state);
       newMap.delete(action.word);
       return newMap;
     }
 
-    case "SET_WORDS": {
+    case 'SET_WORDS': {
       return new Map(action.words);
     }
   }
@@ -92,15 +92,15 @@ export function WordsChestProvider({
   children: React.ReactNode;
 }) {
   const [words, dispatch] = useReducer(wordsRegistryReducer, defaultState);
-  const { saveIfChanged, retrieve } = useStorage("WORDS_CHEST");
+  const { saveIfChanged, retrieve } = useStorage('WORDS_CHEST');
 
   const promoteWords = (words: string[]) =>
-    dispatch({ type: "PROMOTE_WORDS", words });
+    dispatch({ type: 'PROMOTE_WORDS', words });
   const demoteWords = (words: string[]) =>
-    dispatch({ type: "DEMOTE_WORDS", words });
-  const removeWord = (word: string) => dispatch({ type: "REMOVE_WORD", word });
+    dispatch({ type: 'DEMOTE_WORDS', words });
+  const removeWord = (word: string) => dispatch({ type: 'REMOVE_WORD', word });
   const setWords = (words: Map<string, number>) =>
-    dispatch({ type: "SET_WORDS", words });
+    dispatch({ type: 'SET_WORDS', words });
 
   useEffect(() => {
     const topTenWords = [...words.entries()]

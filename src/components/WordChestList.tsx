@@ -1,7 +1,7 @@
-import React from "react";
-import { FlatList } from "react-native";
-import { WordChestEmpty } from "./WordChestEmpty";
-import { WordChestListItem } from "./WordChestListItem";
+import React from 'react';
+import { FlatList } from 'react-native';
+import { WordChestEmpty } from './WordChestEmpty';
+import { WordChestListItem } from './WordChestListItem';
 
 interface Props {
   words: string[];
@@ -16,7 +16,7 @@ export function WordChestList({ words, onRemove }: Props) {
       renderItem={({ item }) => (
         <WordChestListItem word={item} onRemove={() => onRemove(item)} />
       )}
-      keyExtractor={(item) => item}
+      keyExtractor={item => item}
     />
   );
 }

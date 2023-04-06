@@ -6,7 +6,9 @@
     "start": "env-cmd expo start",
     "android": "env-cmd expo start --android",
     "ios": "env-cmd expo start --ios",
-    "web": "env-cmd expo start --web"
+    "web": "env-cmd expo start --web",
+    "lint": "eslint './src/**/*.{js,jsx,ts,tsx}'",
+    "format": "prettier --write \"./src/**/*.{js,jsx,json,ts,tsx}\""
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.17.11",
@@ -30,7 +32,12 @@
   "devDependencies": {
     "@babel/core": "^7.12.9",
     "babel-plugin-transform-inline-environment-variables": "^0.4.4",
-    "env-cmd": "^10.1.0"
+    "env-cmd": "^10.1.0",
+    "eslint": "^8.0.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-config-react-app": "7.0.1",
+    "eslint-plugin-prettier": "^4.2.1",
+    "prettier": "^2.8.7"
   },
   "private": true
 }

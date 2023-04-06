@@ -1,3 +1,3 @@
-import { usePonsLookup } from "./usePonsLookup";
+import { usePonsLookup } from './usePonsLookup';
 
 export const useWordLookup = usePonsLookup;

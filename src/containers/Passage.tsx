@@ -1,7 +1,7 @@
-import { TextPassage } from "../components/TextPassage";
-import { useWordsMarker } from "../contexts/WordMarkerContext";
-import { usePassage } from "../contexts/PassageContext";
-import { useWordLookup } from "../hooks/useWordLookup";
+import { TextPassage } from '../components/TextPassage';
+import { useWordsMarker } from '../contexts/WordMarkerContext';
+import { usePassage } from '../contexts/PassageContext';
+import { useWordLookup } from '../hooks/useWordLookup';
 
 export function Passage() {
   const { passage, isGenerating, sourceWords } = usePassage();

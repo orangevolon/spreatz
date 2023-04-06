@@ -1,7 +1,7 @@
-import { ComponentProps } from "react";
-import { StyleSheet, View } from "react-native";
-import { Button } from "../ui";
-import { theme } from "../ui/theme";
+import { ComponentProps } from 'react';
+import { StyleSheet, View } from 'react-native';
+import { Button } from '../ui';
+import { theme } from '../ui/theme';
 
 interface Props extends ComponentProps<typeof View> {
   button: {
@@ -14,7 +14,7 @@ interface Props extends ComponentProps<typeof View> {
     title: string;
     disabled?: boolean;
   };
-  contentStyle?: ComponentProps<typeof View>["style"];
+  contentStyle?: ComponentProps<typeof View>['style'];
 }
 
 export function Layout({
@@ -31,12 +31,12 @@ export function Layout({
       <View style={styles.buttonsContainer}>
         {secondaryButton ? (
           <Button
-            variant="secondary"
+            variant='secondary'
             style={styles.secondaryButton}
             {...secondaryButton}
           />
         ) : null}
-        <Button variant="primary" style={styles.button} {...button} />
+        <Button variant='primary' style={styles.button} {...button} />
       </View>
     </View>
   );
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
   },
   buttonsContainer: {
     marginTop: theme.spacing.m,
-    flexDirection: "row",
+    flexDirection: 'row',
   },
   button: {
     flex: 1,

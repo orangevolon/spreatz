@@ -1,13 +1,13 @@
-import { LanguageLevel } from "../containers/LanguageLevel";
-import { Layout } from "../components/Layout";
-import { WordLookup } from "../containers/WordLookup";
-import { Passage } from "../containers/Passage";
-import { Section } from "../ui/Section";
-import { useGenerate } from "../hooks/useGenerate";
-import { useNavigation } from "@react-navigation/native";
+import { LanguageLevel } from '../containers/LanguageLevel';
+import { Layout } from '../components/Layout';
+import { WordLookup } from '../containers/WordLookup';
+import { Passage } from '../containers/Passage';
+import { Section } from '../ui/Section';
+import { useGenerate } from '../hooks/useGenerate';
+import { useNavigation } from '@react-navigation/native';
 
 function HomeSection({ children }) {
-  return <Section gap="m">{children}</Section>;
+  return <Section gap='m'>{children}</Section>;
 }
 
 export function HomeScreen() {
@@ -16,19 +16,19 @@ export function HomeScreen() {
 
   const handleNavigateToWordChest = () => {
     // @ts-ignore
-    navigate.navigate("WordChest");
+    navigate.navigate('WordChest');
   };
 
   return (
     <Layout
       button={{
         onPress: generate,
-        title: "Generate",
+        title: 'Generate',
         disabled: isGenerating,
       }}
       secondaryButton={{
         onPress: handleNavigateToWordChest,
-        title: "Word Chest",
+        title: 'Word Chest',
       }}
     >
       <HomeSection>

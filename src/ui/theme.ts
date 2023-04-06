@@ -15,18 +15,18 @@ export const theme = {
     max: Number.MAX_SAFE_INTEGER,
   },
   color: {
-    background: "#ddd",
-    elevatedBackground: "#eee",
-    foreground: "#111",
-    foregroundSubdued: "#555",
-    selectedWord: "#f5bda2",
+    background: '#ddd',
+    elevatedBackground: '#eee',
+    foreground: '#111',
+    foregroundSubdued: '#555',
+    selectedWord: '#f5bda2',
     primaryButton: {
-      background: "#222",
-      foreground: "#eee",
+      background: '#222',
+      foreground: '#eee',
     },
     secondaryButton: {
-      background: "#eee",
-      foreground: "#222",
+      background: '#eee',
+      foreground: '#222',
     },
   },
   typography: {
@@ -45,7 +45,7 @@ export const theme = {
     caption: {
       fontSize: 14,
       lineHeight: 14,
-      fontWeight: "bold",
+      fontWeight: 'bold',
     },
   },
 } as const;

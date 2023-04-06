@@ -1,8 +1,8 @@
-import { LookupEntry as WordLookupEntryType } from "../types/wordLookup";
-import { Card, Text } from "../ui";
-import RenderHtml from "react-native-render-html";
-import { ScrollView, useWindowDimensions, StyleSheet } from "react-native";
-import { theme } from "../ui/theme";
+import { LookupEntry as WordLookupEntryType } from '../types/wordLookup';
+import { Card, Text } from '../ui';
+import RenderHtml from 'react-native-render-html';
+import { ScrollView, useWindowDimensions, StyleSheet } from 'react-native';
+import { theme } from '../ui/theme';
 
 interface Props {
   entry: WordLookupEntryType;
@@ -14,13 +14,13 @@ export function WordLookupEntry({ entry }: Props) {
   return (
     <ScrollView>
       <Card style={styles.section}>
-        <Text variant="large">{entry.word}</Text>
+        <Text variant='large'>{entry.word}</Text>
         <RenderHtml contentWidth={width} source={{ html: entry.details }} />
       </Card>
-      {entry.meanings.map((meaning) => (
+      {entry.meanings.map(meaning => (
         <Card key={meaning.title} style={styles.section}>
           <RenderHtml contentWidth={width} source={{ html: meaning.title }} />
-          {meaning.definitions.map((definition) => (
+          {meaning.definitions.map(definition => (
             <RenderHtml
               key={definition}
               contentWidth={width}

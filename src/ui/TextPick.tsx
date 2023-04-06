@@ -1,15 +1,15 @@
-import { ComponentProps, Fragment, useMemo } from "react";
-import { Pressable, StyleSheet, View } from "react-native";
-import { sanitizeWord } from "../utils/sanitizeWord";
-import { Text } from "./Text";
-import { theme } from "./theme";
+import { ComponentProps, Fragment, useMemo } from 'react';
+import { Pressable, StyleSheet, View } from 'react-native';
+import { sanitizeWord } from '../utils/sanitizeWord';
+import { Text } from './Text';
+import { theme } from './theme';
 
 interface Props extends ComponentProps<typeof Text> {
   pickedWords?: string[];
   onWordPick?: (word: string, index: number) => void;
 }
 
-const WHITESPACE = " ";
+const WHITESPACE = ' ';
 const MARKER_PADDING = theme.spacing.xxs;
 
 export function TextPick({
@@ -29,14 +29,14 @@ export function TextPick({
   };
 
   const words = useMemo(() => {
-    if (typeof children !== "string") {
+    if (typeof children !== 'string') {
       return children;
     }
 
     const words = children.split(/\s/);
 
     return words
-      .filter((word) => Boolean(word))
+      .filter(word => Boolean(word))
       .map((word, index) => {
         const pickedWord = sanitizedPickedWords?.includes(sanitizeWord(word));
         const arrayKey = `${word}-${index}`;
@@ -65,7 +65,7 @@ export function TextPick({
 
 const styles = StyleSheet.create({
   wordSelectedMarker: {
-    position: "absolute",
+    position: 'absolute',
     left: -MARKER_PADDING,
     top: -MARKER_PADDING,
     right: -MARKER_PADDING,
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
     borderRadius: theme.radius.crisp,
   },
   wordBase: {
-    position: "relative",
+    position: 'relative',
   },
   wordSelected: {
     // nothing yet

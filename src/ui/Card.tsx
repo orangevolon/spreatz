@@ -1,9 +1,9 @@
-import { ComponentProps } from "react";
-import { Pressable, StyleSheet, View } from "react-native";
-import { theme } from "./theme";
+import { ComponentProps } from 'react';
+import { Pressable, StyleSheet, View } from 'react-native';
+import { theme } from './theme';
 
 interface Props extends ComponentProps<typeof View> {
-  onPress?: ComponentProps<typeof Pressable>["onPress"];
+  onPress?: ComponentProps<typeof Pressable>['onPress'];
 }
 
 export function Card({ style, onPress, ...rest }: Props) {

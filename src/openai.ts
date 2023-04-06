@@ -1,4 +1,4 @@
-import { Configuration, OpenAIApi } from "openai";
+import { Configuration, OpenAIApi } from 'openai';
 
 const { OPEN_AI_API_KEY } = process.env;
 

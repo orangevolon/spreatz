@@ -1,4 +1,4 @@
-import { LanguageLevel } from "./languageLevel";
+import { LanguageLevel } from './languageLevel';
 
 export type StorageEntry = {
   WORDS_CHEST: Record<string, number>;

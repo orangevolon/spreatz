@@ -1,6 +1,6 @@
-import { useNavigation } from "@react-navigation/native";
-import { Layout } from "../components/Layout";
-import { WordChest } from "../containers/WordChest";
+import { useNavigation } from '@react-navigation/native';
+import { Layout } from '../components/Layout';
+import { WordChest } from '../containers/WordChest';
 
 export function WordChestScreen() {
   const { goBack } = useNavigation();
@@ -9,7 +9,7 @@ export function WordChestScreen() {
     <Layout
       button={{
         onPress: goBack,
-        title: "Back",
+        title: 'Back',
       }}
     >
       <WordChest />

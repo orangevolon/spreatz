@@ -1,15 +1,15 @@
-import { ComponentProps } from "react";
-import { StyleSheet } from "react-native";
-import { ButtonBase } from "./ButtonBase";
-import { theme } from "./theme";
+import { ComponentProps } from 'react';
+import { StyleSheet } from 'react-native';
+import { ButtonBase } from './ButtonBase';
+import { theme } from './theme';
 interface Props extends ComponentProps<typeof ButtonBase> {
-  variant?: "primary" | "secondary";
+  variant?: 'primary' | 'secondary';
 }
 
 export function Button({
   style,
   textStyle,
-  variant = "primary",
+  variant = 'primary',
   ...rest
 }: Props) {
   const baseStyle = styles.base;

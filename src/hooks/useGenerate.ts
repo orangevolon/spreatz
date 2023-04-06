@@ -1,8 +1,8 @@
-import { useEffect } from "react";
-import { useLanguageLevel } from "../contexts/LanguageLevelContext";
-import { usePassage } from "../contexts/PassageContext";
-import { useWordsMarker } from "../contexts/WordMarkerContext";
-import { useWordsChest } from "../contexts/WordsChestContext";
+import { useEffect } from 'react';
+import { useLanguageLevel } from '../contexts/LanguageLevelContext';
+import { usePassage } from '../contexts/PassageContext';
+import { useWordsMarker } from '../contexts/WordMarkerContext';
+import { useWordsChest } from '../contexts/WordsChestContext';
 
 const WORD_DRAW_THRESHOLD = 5;
 const WORD_PICK_THRESHOLD = 1;
@@ -16,7 +16,7 @@ export function useGenerate() {
   const updateWordsChest = () => {
     const wordsToPromote = markedWords;
     const wordsToDemote =
-      sourceWords?.filter((word) => !markedWords.includes(word)) ?? [];
+      sourceWords?.filter(word => !markedWords.includes(word)) ?? [];
 
     promoteWords(wordsToPromote);
     demoteWords(wordsToDemote);

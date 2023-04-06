@@ -1,6 +1,6 @@
-import { useMemo } from "react";
-import { WordChestList } from "../components/WordChestList";
-import { useWordsChest } from "../contexts/WordsChestContext";
+import { useMemo } from 'react';
+import { WordChestList } from '../components/WordChestList';
+import { useWordsChest } from '../contexts/WordsChestContext';
 
 export function WordChest() {
   const { words, removeWord } = useWordsChest();
