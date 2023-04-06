@@ -1,7 +1,7 @@
-import { StyleSheet } from "react-native";
-import { Card, Text } from "../ui";
-import { FlatButton } from "../ui/FlatButton";
-import { theme } from "../ui/theme";
+import { StyleSheet } from 'react-native';
+import { Card, Text } from '../ui';
+import { FlatButton } from '../ui/FlatButton';
+import { theme } from '../ui/theme';
 
 interface Props {
   word: string;
@@ -11,10 +11,10 @@ interface Props {
 export function WordChestListItem({ word, onRemove }: Props) {
   return (
     <Card style={styles.container}>
-      <Text variant="medium" style={styles.text}>
+      <Text variant='medium' style={styles.text}>
         {word}
       </Text>
-      <FlatButton onPress={onRemove} title="Remove" />
+      <FlatButton onPress={onRemove} title='Remove' />
     </Card>
   );
 }
@@ -23,8 +23,8 @@ const styles = StyleSheet.create({
   container: {
     padding: theme.spacing.m,
     marginVertical: theme.spacing.s,
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   text: {
     flex: 1,

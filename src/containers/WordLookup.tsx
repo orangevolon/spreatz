@@ -1,10 +1,10 @@
-import { useNavigation } from "@react-navigation/native";
-import { useEffect, useState } from "react";
-import { WordLookupEntries } from "../components/WordLookupEntries";
-import { usePassage } from "../contexts/PassageContext";
-import { useWordsMarker } from "../contexts/WordMarkerContext";
-import { useWordLookup } from "../hooks/useWordLookup";
-import { LookupEntry } from "../types/wordLookup";
+import { useNavigation } from '@react-navigation/native';
+import { useEffect, useState } from 'react';
+import { WordLookupEntries } from '../components/WordLookupEntries';
+import { usePassage } from '../contexts/PassageContext';
+import { useWordsMarker } from '../contexts/WordMarkerContext';
+import { useWordLookup } from '../hooks/useWordLookup';
+import { LookupEntry } from '../types/wordLookup';
 
 export function WordLookup() {
   const { words } = useWordsMarker();
@@ -15,13 +15,11 @@ export function WordLookup() {
   const [entries, setEntries] = useState<LookupEntry[]>([]);
 
   const fetchNewlyMarkedWords = async () => {
-    const newWords = words.filter(
-      (word) => !entries.find((e) => e.word === word)
-    );
-    const newEntries = await Promise.all(newWords.map((word) => lookup(word)));
+    const newWords = words.filter(word => !entries.find(e => e.word === word));
+    const newEntries = await Promise.all(newWords.map(word => lookup(word)));
 
-    setEntries((entries) => {
-      const remainingEntries = entries.filter((entry) =>
+    setEntries(entries => {
+      const remainingEntries = entries.filter(entry =>
         words.includes(entry.word)
       );
 
@@ -31,7 +29,7 @@ export function WordLookup() {
 
   const handleEntityPress = (entry: LookupEntry) => {
     // @ts-ignore
-    navigate("LookupEntry", { entry });
+    navigate('LookupEntry', { entry });
   };
 
   useEffect(() => {

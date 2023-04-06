@@ -1,9 +1,9 @@
-import { createContext, PropsWithChildren, useContext, useState } from "react";
-import { LanguageLevel } from "../types";
-import { handleError } from "../utils/errors";
-import { useOpenaiPassage } from "../hooks/useOpenaiPassage";
+import { createContext, PropsWithChildren, useContext, useState } from 'react';
+import { LanguageLevel } from '../types';
+import { handleError } from '../utils/errors';
+import { useOpenaiPassage } from '../hooks/useOpenaiPassage';
 
-const DEFAULT_LANGUAGE_LEVEL: LanguageLevel = "A1";
+const DEFAULT_LANGUAGE_LEVEL: LanguageLevel = 'A1';
 
 interface Props {
   useFake?: boolean;
@@ -22,7 +22,7 @@ export function PassageProvider({
     try {
       if (words && words.length) {
         console.log(
-          `Generating ${languageLevel} passage with words: ${words.join(", ")}`
+          `Generating ${languageLevel} passage with words: ${words.join(', ')}`
         );
       } else {
         console.log(

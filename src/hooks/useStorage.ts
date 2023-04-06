@@ -1,7 +1,7 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useRef } from "react";
-import { StorageEntry } from "../types/storageKeys";
-import { handleError } from "../utils/errors";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useRef } from 'react';
+import { StorageEntry } from '../types/storageKeys';
+import { handleError } from '../utils/errors';
 
 export function useStorage<TKey extends keyof StorageEntry>(key: TKey) {
   type TData = StorageEntry[TKey];
@@ -13,7 +13,7 @@ export function useStorage<TKey extends keyof StorageEntry>(key: TKey) {
     try {
       const stringifiedData = await AsyncStorage.getItem(key);
       const data = JSON.parse(stringifiedData) as TData;
-      console.log("Storage retrieving", key, data);
+      console.log('Storage retrieving', key, data);
       isValueRetrievedRef.current = true;
       latestValueRef.current = data;
 
@@ -26,7 +26,7 @@ export function useStorage<TKey extends keyof StorageEntry>(key: TKey) {
   const save = async (value: TData) => {
     try {
       const stringifiedData = JSON.stringify(value);
-      console.log("Storage saving", key, value);
+      console.log('Storage saving', key, value);
       await AsyncStorage.setItem(key, stringifiedData);
     } catch (error) {
       handleError(error);

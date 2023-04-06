@@ -1,15 +1,15 @@
-import { ComponentProps } from "react";
+import { ComponentProps } from 'react';
 import {
   Pressable,
   StyleProp,
   StyleSheet,
   TextStyle,
   ViewStyle,
-} from "react-native";
-import { Text } from "./Text";
-import { theme } from "./theme";
+} from 'react-native';
+import { Text } from './Text';
+import { theme } from './theme';
 
-type OmitProps = "children" | "style";
+type OmitProps = 'children' | 'style';
 
 interface Props extends Omit<ComponentProps<typeof Pressable>, OmitProps> {
   title: string;
@@ -27,7 +27,7 @@ export function ButtonBase({ title, style, textStyle, ...rest }: Props) {
       ]}
       {...rest}
     >
-      <Text variant="caption" style={[styles.text, textStyle]}>
+      <Text variant='caption' style={[styles.text, textStyle]}>
         {title}
       </Text>
     </Pressable>
@@ -37,15 +37,15 @@ export function ButtonBase({ title, style, textStyle, ...rest }: Props) {
 const styles = StyleSheet.create({
   button: {
     padding: theme.spacing.s,
-    alignItems: "center",
-    flexDirection: "row",
-    justifyContent: "center",
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'center',
   },
   buttonPressed: {
     opacity: 0.6,
   },
   text: {
-    fontWeight: "bold",
-    textTransform: "uppercase",
+    fontWeight: 'bold',
+    textTransform: 'uppercase',
   },
 });

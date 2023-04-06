@@ -1,8 +1,8 @@
-import { ComponentProps } from "react";
-import { StyleSheet } from "react-native";
-import { Button } from "./Button";
-import { ButtonBase } from "./ButtonBase";
-import { theme } from "./theme";
+import { ComponentProps } from 'react';
+import { StyleSheet } from 'react-native';
+import { Button } from './Button';
+import { ButtonBase } from './ButtonBase';
+import { theme } from './theme';
 
 type Props = ComponentProps<typeof Button>;
 
