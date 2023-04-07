@@ -17,7 +17,7 @@ interface Props extends ComponentProps<typeof View> {
   contentStyle?: ComponentProps<typeof View>['style'];
 }
 
-export function Layout({
+export function AppLayout({
   children,
   style,
   contentStyle,

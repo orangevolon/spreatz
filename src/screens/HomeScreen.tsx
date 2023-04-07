@@ -1,5 +1,5 @@
 import { LanguageLevel } from '../containers/LanguageLevel';
-import { Layout } from '../components/Layout';
+import { AppLayout } from '../components/AppLayout';
 import { WordLookup } from '../containers/WordLookup';
 import { Passage } from '../containers/Passage';
 import { Section } from '../ui/Section';
@@ -20,7 +20,7 @@ export function HomeScreen() {
   };
 
   return (
-    <Layout
+    <AppLayout
       button={{
         onPress: generate,
         title: 'Generate',
@@ -40,6 +40,6 @@ export function HomeScreen() {
       <HomeSection>
         <WordLookup />
       </HomeSection>
-    </Layout>
+    </AppLayout>
   );
 }

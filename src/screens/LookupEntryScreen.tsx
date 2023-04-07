@@ -1,5 +1,5 @@
 import { useNavigation, useRoute } from '@react-navigation/native';
-import { Layout } from '../components/Layout';
+import { AppLayout } from '../components/AppLayout';
 import { WordLookupEntry } from '../components/WordLookupEntry';
 
 export function LookupEntryScreen() {
@@ -7,9 +7,9 @@ export function LookupEntryScreen() {
   const { params } = useRoute();
 
   return (
-    <Layout button={{ onPress: goBack, title: 'Back' }}>
+    <AppLayout button={{ onPress: goBack, title: 'Back' }}>
       {/* @ts-ignore */}
       <WordLookupEntry entry={params.entry} />
-    </Layout>
+    </AppLayout>
   );
 }
